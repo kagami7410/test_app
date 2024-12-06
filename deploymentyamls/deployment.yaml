@@ -38,7 +38,8 @@ spec:
       serviceAccountName: test-app-sa # Use the service account
       containers:
       - name: test-app
-        image: docker.io/sujan7410/test_app
-        tag: latest
+        image:
+          name: docker.io/sujan7410/test_app
+          tag: latest
         ports:
         - containerPort: 3000
