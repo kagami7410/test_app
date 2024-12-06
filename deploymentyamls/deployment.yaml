@@ -32,7 +32,7 @@ spec:
           {{- with secret "kv/test/test_app" -}}
           test: {{ .Data.data.test }}
           {{- end }}
-        vault.hashicorp.com/agent-inject-file-my-secret: "secret.json"
+        vault.hashicorp.com/agent-inject-file-my-secret: "/app/secret.json"
 
     spec:
       serviceAccountName: test-app-sa # Use the service account
