@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: test_app_sa
+  namespace: test_app
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: test_app
+  name: test_app
+  labels:
+    app: test_app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test_app
+  template:
+    metadata:
+      labels:
+        app: test_app
+      annotations:
+        # Enable Vault Agent Injector
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/agent-init-first: "true"
+        vault.hashicorp.com/role: "test_app_role"               # Vault role for the app
+        vault.hashicorp.com/agent-inject-secret-config: "kv/test/test_app" # Vault secret path
+        vault.hashicorp.com/agent-inject-template-config: |   # Template to inject secret as an env var
+          {{- with secret "kv/test/test_app" -}}
+          test: {{ .Data.data.test }}
+          {{- end }}
+        vault.hashicorp.com/agent-inject-file-my-secret: "secret.json"
+
+    spec:
+      serviceAccountName: test_app_sa # Use the service account
+      containers:
+      - name: test_app
+        image: sujan7410/test_app:latest
+        ports:
+        - containerPort: 3000
