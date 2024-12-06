@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: test_app_sa
+  name: test-app-sa
   namespace: test-app
 
 ---
@@ -35,7 +35,7 @@ spec:
         vault.hashicorp.com/agent-inject-file-my-secret: "secret.json"
 
     spec:
-      serviceAccountName: test_app_sa # Use the service account
+      serviceAccountName: test-app-sa # Use the service account
       containers:
       - name: test-app
         image: sujan7410/test_app:latest
