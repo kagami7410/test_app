@@ -34,7 +34,7 @@ spec:
           {{- with secret "kv/test/test_app" -}}
           test: {{ .Data.data.test }}
           {{- end }}
-        vault.hashicorp.com/secret-volume-path: "/app"
+        vault.hashicorp.com/secret-volume-path: "/app/secrets/"
 
 
 
