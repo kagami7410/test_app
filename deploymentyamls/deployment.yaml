@@ -41,5 +41,7 @@ spec:
       containers:
       - name: test-app
         image: docker.io/sujan7410/test_app
+        command: ["tail", "-f", "/dev/null"]
+
         ports:
         - containerPort: 3000
