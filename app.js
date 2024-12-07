@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 // Specify the file path
-const filePath = 'secret.json';
+const filePath = 'secrets/secret.json';
 let secret ;
 // Read the file
 fs.readFile(filePath, 'utf8', (err, data) => {
