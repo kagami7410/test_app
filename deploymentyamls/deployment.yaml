@@ -33,7 +33,7 @@ spec:
         vault.hashicorp.com/agent-inject-template-secret.json: |   # Template to inject secret as an env var
           {{- with secret "kv/test/test_app" -}}
           {
-            test: {{ .Data.data.test }}
+            "test": "{{ .Data.data.test }}"
           }
           {{- end }}
         vault.hashicorp.com/secret-volume-path: "/app/secrets/"
